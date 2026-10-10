@@ -4,171 +4,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Lily for You</title>
+<title>A Tulips for you</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(ellipse, #171331, #03030b 75%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: radial-gradient(circle, #171333, #08091d 70%);
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
-.scene {
-  position: relative;
-  width: min(90vw, 430px);
-  height: 480px;
-}
-
-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.petal {
-  transform-box: fill-box;
-  transform-origin: center bottom;
-  animation: bloom 2s ease-out both, glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes bloom {
-  from { opacity: 0; transform: scale(0.05); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes glow {
-  from { filter: drop-shadow(0 0 4px #ff70dc); }
-  to { filter: drop-shadow(0 0 14px #81eaff); }
-}
-
-.spark {
-  fill: #fff;
-  filter: drop-shadow(0 0 6px #ff75e7);
-  animation: twinkle 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes twinkle {
-  from { opacity: .2; }
-  to { opacity: 1; }
-}
-
+/* Heading and message */
 h1 {
-  color: #ff8cde;
-  text-align: center;
-  font-size: clamp(25px, 6vw, 38px);
-  font-style: italic;
-  text-shadow: 0 0 12px #ff35d0;
-  margin: 0;
+    color: #ff9be9;
+    text-shadow: 0 0 10px #ff4dd2, 0 0 25px #ff4dd2;
+    font-size: clamp(24px, 6vw, 35px);
+    text-align: center;
+    margin: 5px 10px;
+    opacity: 0;
+    animation: textEntrance 1s ease-out 1.8s forwards;
 }
 
 p {
-  color: #8ce8ff;
-  text-align: center;
-  text-shadow: 0 0 10px #49cfff;
-  font-style: italic;
+    color: #8eeaff;
+    text-shadow: 0 0 12px #00bfff;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 8px;
+    opacity: 0;
+    animation: textEntrance 1s ease-out 2.2s forwards;
+}
+
+/* Three tulips entrance */
+.garden {
+    width: min(90vw, 430px);
+    height: auto;
+    overflow: visible;
+    transform-origin: bottom center;
+    opacity: 0;
+    animation:
+        flowerEntrance 2s ease-out forwards,
+        flowerFloat 3s ease-in-out 2s infinite;
+}
+
+@keyframes flowerEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(150px) scale(0.3);
+        filter: drop-shadow(0 0 0px #ff71e8);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-15px) scale(1.05);
+        filter: drop-shadow(0 0 18px #ff71e8);
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 8px #ff71e8);
+    }
+}
+
+@keyframes flowerFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Text entrance */
+@keyframes textEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tulip colors */
+.pink {
+    fill: url(#pinkGradient);
+    stroke: #ffd5f5;
+    stroke-width: 1.5;
+}
+
+.blue {
+    fill: url(#blueGradient);
+    stroke: #c8f7ff;
+    stroke-width: 1.5;
+}
+
+.leaf {
+    fill: #24c95a;
+    stroke: #8aff9d;
+    stroke-width: 1.5;
+}
+
+.stem {
+    fill: none;
+    stroke: #36df68;
+    stroke-width: 7;
+    stroke-linecap: round;
+}
+
+/* Sparkle effects */
+.sparkle {
+    position: absolute;
+    color: #fff;
+    pointer-events: none;
+    text-shadow: 0 0 10px #ff7be8, 0 0 20px #65eaff;
+    animation: sparkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes sparkle {
+    from {
+        opacity: 0.2;
+        transform: scale(0.7) rotate(0deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3) rotate(25deg);
+    }
+}
+
+.s1 { top: 12%; left: 15%; }
+.s2 { top: 22%; right: 15%; animation-delay: 0.5s; }
+.s3 { top: 48%; left: 8%; animation-delay: 1s; }
+.s4 { top: 60%; right: 10%; animation-delay: 0.7s; }
+.s5 { top: 35%; left: 25%; animation-delay: 1.2s; }
+.s6 { top: 40%; right: 25%; animation-delay: 0.3s; }
+
+@media (max-height: 650px) {
+    .garden {
+        width: min(65vw, 300px);
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .garden, h1, p, .sparkle {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<div class="scene">
-<svg viewBox="0 0 400 480" aria-label="Glowing pink and blue lily">
-  <defs>
-    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#fff0ff"/>
-      <stop offset=".45" stop-color="#ff69d2"/>
-      <stop offset="1" stop-color="#a42bdb"/>
-    </linearGradient>
-    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#e7ffff"/>
-      <stop offset=".5" stop-color="#78e7ff"/>
-      <stop offset="1" stop-color="#5573e8"/>
-    </linearGradient>
-    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#a6ffb9"/>
-      <stop offset="1" stop-color="#08783d"/>
-    </linearGradient>
-  </defs>
+<!-- Glowing sparkles -->
+<span class="sparkle s1">✦</span>
+<span class="sparkle s2">✧</span>
+<span class="sparkle s3">✧</span>
+<span class="sparkle s4">✦</span>
+<span class="sparkle s5">✧</span>
+<span class="sparkle s6">✦</span>
 
-  <!-- Green stem and leaves -->
-  <path d="M200 220 Q205 310 195 430"
-        stroke="#42ff8a" stroke-width="8" fill="none"
-        stroke-linecap="round"/>
-  <path d="M199 355 Q120 270 75 320 Q125 385 199 355Z"
-        fill="url(#leaf)" stroke="#9dffb3" stroke-width="2"/>
-  <path d="M198 390 Q260 300 320 330 Q285 400 198 390Z"
-        fill="url(#leaf)" stroke="#9dffb3" stroke-width="2"/>
-  <path d="M190 355 L100 323 M205 390 L300 337"
-        stroke="#c2ffd0" stroke-width="2" fill="none"/>
+<!-- Three tulips -->
+<svg class="garden" viewBox="0 0 400 500"
+     xmlns="http://www.w3.org/2000/svg">
 
-  <!-- Six lily petals -->
-  <g class="petal">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          fill="url(#pink)" stroke="#ffc8f4" stroke-width="2"/>
-  </g>
-  <g class="petal" style="animation-delay:.15s">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          transform="rotate(60 200 230)"
-          fill="url(#blue)" stroke="#b8f6ff" stroke-width="2"/>
-  </g>
-  <g class="petal" style="animation-delay:.3s">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          transform="rotate(120 200 230)"
-          fill="url(#pink)" stroke="#ffc8f4" stroke-width="2"/>
-  </g>
-  <g class="petal" style="animation-delay:.45s">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          transform="rotate(180 200 230)"
-          fill="url(#blue)" stroke="#b8f6ff" stroke-width="2"/>
-  </g>
-  <g class="petal" style="animation-delay:.6s">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          transform="rotate(240 200 230)"
-          fill="url(#pink)" stroke="#ffc8f4" stroke-width="2"/>
-  </g>
-  <g class="petal" style="animation-delay:.75s">
-    <path d="M200 230 Q95 155 155 60 Q200 105 200 230Z"
-          transform="rotate(300 200 230)"
-          fill="url(#blue)" stroke="#b8f6ff" stroke-width="2"/>
-  </g>
+    <defs>
+        <linearGradient id="pinkGradient"
+                        x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffd0f3"/>
+            <stop offset="50%" stop-color="#ff63ce"/>
+            <stop offset="100%" stop-color="#d92eaa"/>
+        </linearGradient>
 
-  <!-- Lily center and stamens -->
-  <circle cx="200" cy="230" r="17" fill="#fff3a6"/>
-  <g stroke="#fff1a0" stroke-width="4" stroke-linecap="round">
-    <path d="M200 230 L170 185 M200 230 L187 170
-             M200 230 L210 168 M200 230 L230 185"/>
-  </g>
-  <g fill="#ffdf77">
-    <circle cx="170" cy="185" r="6"/>
-    <circle cx="187" cy="170" r="6"/>
-    <circle cx="210" cy="168" r="6"/>
-    <circle cx="230" cy="185" r="6"/>
-  </g>
+        <linearGradient id="blueGradient"
+                        x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#d6fbff"/>
+            <stop offset="50%" stop-color="#60e4ff"/>
+            <stop offset="100%" stop-color="#319bff"/>
+        </linearGradient>
+    </defs>
 
-  <!-- Sparkles -->
-  <g class="spark">
-    <circle cx="60" cy="100" r="3"/>
-    <circle cx="325" cy="120" r="4"/>
-    <circle cx="85" cy="230" r="3"/>
-    <circle cx="310" cy="270" r="3"/>
-    <circle cx="115" cy="55" r="3"/>
-    <circle cx="280" cy="65" r="4"/>
-    <circle cx="130" cy="400" r="3"/>
-    <circle cx="290" cy="420" r="3"/>
-  </g>
+    <!-- Green stems -->
+    <path class="stem" d="M200 440 Q180 300 105 180"/>
+    <path class="stem" d="M200 440 Q200 270 200 130"/>
+    <path class="stem" d="M200 440 Q230 290 295 190"/>
+
+    <!-- Green leaves -->
+    <path class="leaf"
+          d="M195 370 Q115 350 65 270
+             Q140 285 195 370 Z"/>
+
+    <path class="leaf"
+          d="M202 390 Q270 350 330 290
+             Q300 365 202 390 Z"/>
+
+    <path class="leaf"
+          d="M185 330 Q150 265 170 210
+             Q205 265 185 330 Z"/>
+
+    <path class="leaf"
+          d="M215 350 Q250 270 250 225
+             Q275 300 215 350 Z"/>
+
+    <!-- Left blue tulip -->
+    <g transform="translate(105 175)">
+        <path class="blue"
+              d="M-48 10
+                 Q-62 -30 -35 -57
+                 Q-25 -25 -12 -47
+                 Q0 -75 12 -45
+                 Q35 -65 45 -35
+                 Q65 -5 42 22
+                 Q10 50 -8 42
+                 Q-35 40 -48 10 Z"/>
+
+        <path d="M-30 -42 Q-18 0 -8 35"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+
+        <path d="M8 -40 Q12 0 5 38"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+
+        <path d="M32 -30 Q30 5 10 35"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+    </g>
+
+    <!-- Center pink tulip -->
+    <g transform="translate(200 120)">
+        <path class="pink"
+              d="M-48 25
+                 Q-62 -18 -38 -58
+                 Q-23 -34 -12 -63
+                 Q0 -85 12 -60
+                 Q28 -36 38 -58
+                 Q60 -15 47 25
+                 Q30 65 0 68
+                 Q-30 65 -48 25 Z"/>
+
+        <path d="M-30 -43 Q-22 5 -5 60"
+              fill="none" stroke="#ffe7fa" stroke-width="2"/>
+
+        <path d="M0 -58 Q5 0 0 65"
+              fill="none" stroke="#ffe7fa" stroke-width="2"/>
+
+        <path d="M30 -42 Q25 10 8 58"
+              fill="none" stroke="#ffe7fa" stroke-width="2"/>
+    </g>
+
+    <!-- Right blue tulip -->
+    <g transform="translate(295 185)">
+        <path class="blue"
+              d="M-45 15
+                 Q-60 -20 -35 -55
+                 Q-20 -28 -10 -50
+                 Q5 -73 18 -45
+                 Q38 -62 48 -30
+                 Q60 5 38 28
+                 Q10 48 -10 42
+                 Q-30 38 -45 15 Z"/>
+
+        <path d="M-28 -40 Q-20 0 -5 35"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+
+        <path d="M10 -42 Q15 0 5 38"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+
+        <path d="M32 -27 Q30 5 10 35"
+              fill="none" stroke="#e5fcff" stroke-width="2"/>
+    </g>
+
+    <!-- Pink ribbon bow -->
+    <path d="M200 425
+             C165 390 150 420 190 435
+             C150 465 180 470 200 440
+             C220 470 250 465 210 435
+             C250 420 235 390 200 425 Z"
+          fill="#ff8bdd" stroke="#ffd6f5" stroke-width="2"/>
+
+    <circle cx="200" cy="435" r="8" fill="#ffd6f5"/>
+
 </svg>
-</div>
 
-<h1>I'M SORRY 💗</h1>
-<p>BFF NA ULIT US <3</p>
+<!-- Message -->
+<h1>HELLO CELINE</h1>
+<p>BFF NA US ULIT :(</p>
 
 </body>
 </html>
